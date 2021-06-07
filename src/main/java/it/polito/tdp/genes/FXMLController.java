@@ -6,6 +6,7 @@ package it.polito.tdp.genes;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.genes.model.Adiacente;
@@ -84,7 +85,20 @@ public class FXMLController {
 
     @FXML
     void doSimula(ActionEvent event) {
-
+    	Genes start = this.cmbGeni.getValue();
+    	int n = Integer.parseInt(this.txtIng.getText());
+    	
+    	Map<Genes, Integer> studiati = this.model.simulaIngegneri(start, n);
+    	
+    	if(studiati == null) {
+    		this.txtResult.appendText("ERRORE: gene selezionato isolato\n");
+    	}
+    	else {
+    		this.txtResult.appendText("\nRisultato simulazione:\n");
+    		for(Genes g : studiati.keySet()) {
+    			this.txtResult.appendText(g + " " + studiati.get(g) + "\n");
+    		}
+    	}
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

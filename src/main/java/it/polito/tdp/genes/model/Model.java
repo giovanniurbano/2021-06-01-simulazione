@@ -62,4 +62,15 @@ public class Model {
 		return result;
 	}
 	
+	public Map<Genes, Integer> simulaIngegneri(Genes start, int n) {
+		try {
+			Simulator sim = new Simulator(start, n, this.grafo);
+			sim.run();
+			
+			return sim.getGeniStudiati();
+		}
+		catch(IllegalArgumentException iae) {
+			return null;
+		}
+	}
 }
